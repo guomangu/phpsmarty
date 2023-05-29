@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="templates/assets/css/common.css" />
+    {block name=customStyle}
+    {/block}
+    <title>{$baliseTitle}</title>
+
+    {block name=headJS}
+    {/block}
+</head>
+
+<body>
+    
+    {block name=background}
+    {* Video(s) servant de background à la page *}
+    <div id="video-carousel-example" class="carousel slide carousel-fade position-relative bgvid" data-ride="carousel" data-interval=60000>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <video class="bgvid" autoplay muted loop>
+                    <source src="templates/assets/vid/videoAccueil.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+    </div>
+    {/block}
+
+    {block name=divPrincipale}
+    <div id="divPrincipale">
+        {* header *}
+        {include file='header.html'}
+        
+        {* bloc central: affichage des apperçus d'articles *}
+        {block name=blocMain}
+        <main>
+            <div id="divConteneur">
+                {* présentation de 3 produits au hasard *}
+                <div class="divPresentation customShadow">
+                    <h2>Laissez vous tentez par ces quelques lectures</h2>
+                </div>
+    
+                {if isset($tab3ProduitsHasard)}
+                    <div class="divExtraits marginBottom">
+                        {foreach from=$tab3ProduitsHasard item=produit name=tab}
+                            <div class="divProduitAccueil customShadow">
+                                <h3>{$produit->getTitre()}</h3>
+
+                                {assign "article" $produit->getRandArticle()}
+                                {if !empty($article)}
+                                    {assign "articleTexte" $produit->getRandArticle()->getTexte()}
+                                    {if !empty($articleTexte)}
+                                    <p>{$articleTexte}</p>
+                                    {else}
+                                    <p>Soyez le premier à ajouter un article</p>
+                                    {/if}
+                                {else}
+                                <p>Soyez le premier à ajouter un article</p>
+                                {/if}
+                                
+                                <a class="btn btn-primary" href="{$link->getPageJeuAcceuilLink($smarty.foreach.tab.index, 1)}">Lire Plus</a>
+                            </div>
+                        {/foreach}
+                    </div>
+                {/if}
+    
+                {* présentation des 3 derniers produits ajoutés à la bdd *}
+                <div class="divPresentation customShadow">
+                    <h2>Voici les derniers jeux à avoir reçu de nouveaux articles</h2>
+                </div>
+    
+                {if isset($tab3DerniersProduits)}
+                    <div class="divExtraits">
+                        {foreach from=$tab3DerniersProduits item=produit name=tab}
+                            <div class="divProduitAccueil customShadow">
+                                <h3>{$produit->getTitre()}</h3>
+
+                                {assign "article" $produit->getRandArticle()}
+                                {if !empty($article)}
+                                    {assign "articleTexte" $produit->getRandArticle()->getTexte()}
+                                    {if !empty($articleTexte)}
+                                    <p>{$articleTexte}</p>
+                                    {else}
+                                    <p>Soyez le premier à ajouter un article</p>
+                                    {/if}
+                                {else}
+                                <p>Soyez le premier à ajouter un article</p>
+                                {/if}
+                                
+                                <a class="btn btn-primary" href="{$link->getPageJeuAcceuilLink($smarty.foreach.tab.index, 2)}">Lire Plus</a>
+                            </div>
+                        {/foreach}
+                    </div>
+                {/if}
+            </div>
+        </main>
+        {/block}
+        
+        {* footer *}
+        {include file='footer.html'}
+    </div>
+    {/block}
+
+    {* Optional JavaScript *}
+    {* jQuery first, then Popper.js, then Bootstrap JS *}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    {block name=barreRechercheJS}
+    <script>
+        var tabDonnees = []; // le tableau de données
+        var inputRecherche = document.getElementById( "inputRecherche" ); //représente le champs de texte
+        var currentFocus; // l'index de l'élément selectionné dans le champs de suggestions
+        
+        // execute une fonction lorsqu'on écrit dans le champs de texte
+        inputRecherche.addEventListener(
+            "input",
+            function () { ajaxRecherche(); }
+        );
+        
+        // execute une fonction lorsqu'on appuie sur une touche
+        inputRecherche.addEventListener(
+            "keydown",
+            function ( char )
+            {
+                var tabSuggestions = document.getElementById(this.id + "autocomplete-list");
+                if ( tabSuggestions )
+                {
+                    tabSuggestions = tabSuggestions.getElementsByTagName( "div" );
+                }
+                    
+                if ( char.keyCode == 40 ) 
+                {
+                    // si on appuie sur la touche DOWN, on incrémente currentFocus
+                    currentFocus++;
+                    // et on mets l'objet correspondant en surbrillance
+                    addActive( tabSuggestions );
+                } 
+                else if ( char.keyCode == 38 ) 
+                { 
+                    // si on appuie sur la touche UP, on incrémente currentFocus
+                    currentFocus--;
+                    // et on mets l'objet correspondant en surbrillance
+                    addActive( tabSuggestions );
+                } 
+                else if ( char.keyCode == 13 ) 
+                {
+                    // si on appuie sur la touche ENTER, 
+                    // on empêche la soumission du formulaire
+                    char.preventDefault();
+                    if (currentFocus > -1) 
+                    {
+                        // et on simule un click sur l'objet en surbrillance
+                        if ( tabSuggestions )
+                        {
+                            tabSuggestions[currentFocus].click();
+                        }
+                    }
+                }
+            }
+        );
+        
+        // éxécute une fonction lorsqu'on clique dans le document
+        document.addEventListener(
+            "click", 
+            function ( tabSuggestions ) { closeAllLists( tabSuggestions.target ); }     
+        );
+        
+        // fonction pour mettre un objet en surbrillance
+        function addActive( tabSuggestions ) 
+        {
+            if ( !tabSuggestions )
+            {
+                return false;
+            }
+            
+            // on commence par reinitiliser tout les objets de la liste
+            removeActive( tabSuggestions );
+
+            if ( currentFocus >= tabSuggestions.length )
+            {
+                currentFocus = 0;
+            }
+
+            if ( currentFocus < 0 )
+            {
+                currentFocus = (tabSuggestions.length - 1);
+            }
+
+            // on ajoute la classe "autocomplete-active"
+            tabSuggestions[currentFocus].classList.add( "autocomplete-active" );
+        }
+
+        // fonction pour reinitiliser tout les objets de la liste
+        function removeActive( tabSuggestions )
+        {
+            for ( var i = 0; i < tabSuggestions.length; ++i )
+            {
+                tabSuggestions[i].classList.remove( "autocomplete-active" );
+            }
+        }
+
+        // ferme toutes les listes d'autocompletion dans le document,
+        // saut pour celle passer en argument
+        function closeAllLists( element )
+        {
+            var tabSuggestions = document.getElementsByClassName( "autocomplete-items" );
+            for ( var i = 0; i < tabSuggestions.length; ++i )
+            {
+                if ( element != tabSuggestions[i] && element != inputRecherche ) 
+                {
+                    tabSuggestions[i].parentNode.removeChild( tabSuggestions[i] );
+                }
+             }
+        }
+
+        function ajaxRecherche()
+        {
+            alert("test");
+            var xhr=null;
+        
+            if (window.XMLHttpRequest) { 
+                xhr = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject) 
+            {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            //on définit l'appel de la fonction au retour serveur
+            xhr.onreadystatechange = function () { alertAjaxRecherche( xhr ); };
+        
+            xhr.open( "GET", "././ajaxBarreRecherche.php?input="+inputRecherche.value, true );
+            xhr.send( null );
+        }
+
+        function alertAjaxRecherche( xhr )
+        {
+            if ( xhr.readyState == 4 ) 
+            {
+                var docXML= xhr.responseXML;
+                var items = docXML.getElementsByTagName( "donnee" );
+                tabDonnees = [];
+                //on fait juste une boucle sur chaque element "donnee" trouvé
+                for ( i = 0; i < items.length; ++i )
+                {
+                    tabDonnees.push( items.item( i ).firstChild.data );
+                }
+
+                var divListeSuggestions, divSuggestion;
+                var inputRechercheValue = inputRecherche.value;
+
+                // on ferme toute listes de valeur autocompleté dejà existente
+                closeAllLists();
+
+                if ( !inputRechercheValue )
+                { 
+                    return false;
+                }
+
+                currentFocus = -1;
+
+                // on créée une div qui contiendra les objets
+                divListeSuggestions = document.createElement( "div" );
+                divListeSuggestions.setAttribute( "id", inputRecherche.id + "autocomplete-list" );
+                divListeSuggestions.setAttribute( "class", "autocomplete-items" );
+                // on fait de cette div un enfant de la barre de recherche
+                inputRecherche.parentNode.appendChild( divListeSuggestions );
+
+                for ( i = 0; i < tabDonnees.length; ++i )
+                {
+                    // on crée une div pour chaque élément
+                    divSuggestion = document.createElement("DIV");
+                    // les lettres correspondantes en gras
+                    divSuggestion.innerHTML = "<strong>" + tabDonnees[i].substr( 0, inputRechercheValue.length ) + "</strong>";
+                    divSuggestion.innerHTML += tabDonnees[i].substr( inputRechercheValue.length );
+                    // execute une fonction lorsqu'on clique sur l'objet
+                    divSuggestion.addEventListener(
+                        "click", 
+                        function ( e )
+                        {
+                            // on insert la valeur dans le champs de recherche
+                            inputRecherche.value = this.innerText;
+                            
+                            closeAllLists();
+                        }
+                    );
+                    
+                    // puis on insere cette div dans liste de suggestions
+                    divListeSuggestions.appendChild( divSuggestion );
+                }
+            }
+        }
+    </script>
+    {/block}
+
+    {block name=postJS}
+    {/block}
+</body>
+</html>

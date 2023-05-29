@@ -1,0 +1,184 @@
+#divZoneAjout
+{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+    
+    background-color:#005ebc;
+    opacity: .80;
+
+    overflow: auto;
+    cursor: pointer;
+
+    display: none;
+
+    z-index: 16;
+}
+
+.divAjout
+{
+    position:absolute;
+    left: 50%;
+    top: 50%;
+
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    min-width:250px;
+
+    padding:10px 50px;
+
+    background-color:#fff;
+
+    display: none; /* changé en grid via js */
+    grid-gap: 5px;
+
+    z-index: 17;
+}
+
+    .divAjout textarea
+    {
+        width: 400px;
+        height: 300px;
+    }
+
+    .divAjout button
+    {
+        width: fit-content;
+        justify-self: end;
+    }
+
+/*===========================================================================*/
+
+#divAjoutImage
+{
+    width: 500px;
+}
+
+#formImage
+{
+    display: grid;
+    grid-gap: 5px;
+}
+
+#buttonAddImage
+{
+    width: fit-content;
+    justify-self: end;
+}
+
+/* ==========================================================================*/
+
+#carouselImagesProduits
+{
+    width: var(--mainWidth);
+    margin: auto;
+}
+
+.carousel-inner
+{
+    /* height: 350px;
+    display: grid;
+    justify-content: center;
+    align-items: center; */
+}
+
+/* .carousel-inner::after {
+    display: table-cell;
+    vertical-align: middle;
+    clear: both;
+    content: "";
+} */
+
+.carousel-item
+{
+    height: 100%;
+}
+
+    .carousel-item img
+    {
+        max-height: 350px;
+        width: auto;
+    }
+
+.carouselConteneur
+{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+/*===========================================================================*/
+
+.divPresentation h2 {
+}
+
+/* ==========================================================================*/
+
+.divArticleProduit
+{
+    height: fit-content;
+    background-color: var(--elementClr);
+}
+
+.divProduit
+{
+    width: 360px;
+    height: 300px;
+    padding: 0 5px 0 5px;
+
+    text-align: center;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+    grid-row-gap: 10px;
+}
+
+    .divProduit button
+    {
+        margin-bottom: 10px;
+        justify-self: center;
+    }
+
+    .divProduit h2, p
+    {
+        margin: 0;
+    }
+
+.divCommentaires
+{
+    width: 360px;
+    padding: 0 5px 0 5px;
+}
+
+    .divCommentaires hr:last-child
+    {
+        margin-bottom: 0;
+    }
+
+/*===========================================================================*/
+
+#divAjoutCommentaires
+{
+    display: grid;
+    grid-gap: 5px;
+}
+
+    #divAjoutCommentaires button
+    {
+        width: fit-content;
+        justify-self: end;
+    }
+
+
+
+
+ 

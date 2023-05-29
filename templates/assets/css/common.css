@@ -1,0 +1,338 @@
+:root
+{
+    --margeV: 10px;
+    --elementClr: rgba(255, 255, 255, 0.5);
+    --mainWidth: 1140px;
+}
+
+.customShadow
+{
+    -moz-box-shadow: 0px 0px 10px 5px rgba(65, 65, 65, 0.5);
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(65, 65, 65, 0.5);
+    -o-box-shadow: 0px 0px 10px 5px rgba(65, 65, 65, 0.5);
+    box-shadow: 0px 0px 10px 5px rgba(65, 65, 65, 0.5);
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=rgba(65, 65, 65, 0.5), Direction=NaN, Strength=10);
+}
+
+.marginBottom
+{
+    margin-bottom: 20px;
+}
+
+.bgColor
+{
+    background-color: var(--elementClr);
+}
+
+/* ==========================================================================*/
+
+header
+{
+    background-color: var(--elementClr);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+footer
+{
+    height: 38px;
+    
+    background-color: var(--elementClr);
+}
+
+/* Burger ===================================================================*/
+
+#divBurger {
+  
+}
+
+#burger
+{
+    display: none;
+}
+
+input + label {
+    position: fixed;
+    top: 8px;
+    left: 10px;
+    height: 38px;
+    width: 38px; 
+    z-index: 5;    
+}
+
+    input + label span {
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        top: 50%;
+        margin-top: -1px;
+        left: 0;
+        display: block;
+        background: black;
+        transition: .5s;
+    }
+
+        input + label span:first-child {
+            top: 3px; 
+        }
+
+        input + label span:last-child {
+            top: 35px; 
+        }
+
+label:hover {
+    cursor: pointer;
+}
+
+input:checked + label { 
+    
+}
+
+    input:checked + label span {
+        opacity: 0;
+        top: 50%;
+    }
+
+        input:checked + label span:first-child {
+            opacity: 1;
+            transform: rotate(405deg);
+        }
+
+        input:checked + label span:last-child {
+            opacity: 1;
+            transform: rotate(-405deg);
+        }
+
+input ~ nav {
+    /* background: white; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* width: 400px; */
+    height: 100px;
+    z-index: 3;
+    transition: .5s;
+    transition-delay: .5s;
+    overflow: hidden;
+}
+
+    input ~ nav a, input ~ nav hr
+    {
+        /* text-align: center;
+        position: absolute;
+        top: 35%;
+        left: 20%;
+        right: 20%; */
+        opacity: 0;
+        transition: .5s;
+        transition-delay: 0s;
+        text-decoration: none;
+        /* text-transform: uppercase; */
+        color: black;
+        font-size: 1.2em;
+        font-weight: 400;
+        /* font-family: sans-serif; */
+        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
+        /* padding: 30px; */
+    }
+
+    input ~ nav hr:first-child {
+        margin-top : 55px;
+    }
+
+input:checked ~ nav { 
+    background: white;
+    /* width: 400px; */
+    height: 100%;
+    transition-delay: 0s;
+}
+
+    input:checked ~ nav a, input:checked ~ nav hr
+    {
+        opacity: 1;
+        transition-delay: .5s;
+    }
+
+/*===========================================================================*/
+
+header h1
+{
+    justify-self: center;
+    grid-column-start: 2;
+}
+
+/* Barre de recherche =======================================================*/
+
+#barreRecherche
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 0;
+    margin-right: 10px;
+    justify-content: end;
+    grid-gap: 5px;
+    grid-column-start: 3;
+}
+
+/*le conteneur doit etre en position: relative*/
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete input {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.autocomplete input[type=text] {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+/* input[type=submit] {
+    background-color: DodgerBlue;
+    color: #fff;
+    cursor: pointer;
+} */
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*donne la même largeur à la liste d'autocomplétion que le conteneur*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+/*===========================================================================*/
+
+#divPrincipale {
+    display: grid;
+    grid-template-rows: 56px minmax(calc(100vh - 94px), 1fr) 38px;
+}
+
+main
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+#divConteneur
+{
+    width: var(--mainWidth);
+
+    display: grid;
+    grid-row-gap: 10px;
+}
+
+/* ==========================================================================*/
+
+.divPresentation
+{
+    width: 100%;
+    height: 25px;
+
+    background-color: var(--elementClr);
+    text-align: center;
+}
+
+    .divPresentation h2
+    {
+        font-size: 1.2em;
+        font-weight: 500;
+        margin: 0;
+    }
+
+.divExtraits
+{
+    width: 100%;
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: start;
+    grid-gap: 20px 30px;
+}
+
+    .divExtraits h3
+    {
+        font-size: 2rem;
+    }
+
+/* Backgound video ==========================================================*/
+
+.bgvid {
+    position: fixed; right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto; z-index: -100;
+    background: url() no-repeat;
+    background-size: cover;
+}
+
+/* ==========================================================================*/
+
+.divProduitAccueil
+{
+    width: 360px;
+    height: 300px;
+    padding: 0 5px 0 5px;
+    
+    background-color: var(--elementClr);
+    text-align: center;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+    grid-row-gap: 10px;
+}
+
+    .divProduitAccueil a
+    {
+        margin-bottom: 10px;
+        justify-self: center;
+    }
+
+    .divProduitAccueil h2, p
+    {
+        margin: 0;
+    }
+
+/*****************************************************************************/
+
+.pagination
+{
+    margin-bottom: 0;
+}

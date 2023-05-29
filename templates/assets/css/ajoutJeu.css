@@ -1,0 +1,51 @@
+.divPresentation
+{
+    width: 100%;
+    height: auto;
+
+    background-color: var(--elementClr);
+    text-align: center;
+}
+
+    .divPresentation h1
+    {
+        font-size: 1.5em;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .divPresentation h2
+    {
+        font-size: 1.2em;
+        font-weight: 500;
+        margin: 0;
+    }
+
+#divNomJeu
+{
+    padding: 5px;
+    display: grid;
+    grid-template-columns: max-content auto;
+}
+
+    #divNomJeu label
+    {
+        align-self: center;
+        margin: 0;
+    }
+
+.divProduitAccueil textarea
+{
+    height: 240px;
+}
+
+.divButton
+{
+    display: grid;
+    justify-content: center;
+}
+
+#divMessages
+{
+    color: red;
+}

@@ -1,0 +1,70 @@
+:root
+{
+    --largeurInput: 235px;
+}
+
+main
+{
+    grid-template-columns: 100%;
+}
+
+.formulaireAdmin {
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 0 10px 0 10px;
+
+    display: grid;
+    grid-template-columns: var(--largeurInput) var(--largeurInput);
+    grid-gap: 10px;
+}
+
+    .formulaireAdmin div 
+    {
+        display: grid;
+    }
+
+    .formulaireAdmin button
+    {
+        margin-bottom: 10px;
+    }
+
+    .formulaireAdmin input[type="datetime-local"]
+    {
+        max-width: var(--largeurInput);
+    }
+
+.divTextarea textarea
+{
+    height: 200px;
+}
+
+.formulaireExpand
+{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.vCenter
+{
+    justify-self: center;
+}
+
+.hEnd
+{
+    align-self: end;
+}
+
+.divButton button
+{
+    width: fit-content;
+}
+
+.divMessagesFormulaireAdmin
+{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: fit-content;
+}

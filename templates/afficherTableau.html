@@ -1,0 +1,201 @@
+<!-- affichage des donnees sous forme de tableau -->
+<table id="tableauDonnees{$nomTable}" class="table">
+    <thead id="enteteTableau{$nomTable}" class="thead-dark">
+        <!-- l'en-tête tableau sera créée dynamiquement en javascript -->
+    </thead>
+
+    <tbody id="corpsTableau{$nomTable}">
+        <!-- le corps du tableau sera créée dynamiquement en javascript -->
+    </tbody>
+</table>
+
+<!-- pagination -->
+<nav aria-label="Page navigation example">
+    <ul id="ulPagination{$nomTable}" class="pagination">
+        <li id="page{$nomTable}Prev" class="page-item">
+            <p class="page-link" aria-label="Previous" onclick="decrementCurrentPage{$nomTable}()">
+                <span aria-hidden="true">&laquo;</span>
+            </p>
+        </li>
+        <!-- les boutons chiffrés seront créée dynamiquement en javascript -->
+        <li id="page{$nomTable}Next" class="page-item">
+            <p class="page-link" aria-label="Next" onclick="incrementCurrentPage{$nomTable}()">
+                <span aria-hidden="true">&raquo;</span>
+            </p>
+        </li>
+    </ul>
+</nav>
+
+{* modifications et suppressions *}
+<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="modifier{$nomTable}-tab" data-toggle="tab" href="#modifier{$nomTable}" role="tab" aria-controls="modifier{$nomTable}" aria-selected="true">Modifier</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" id="supprimer{$nomTable}-tab" data-toggle="tab" href="#supprimer{$nomTable}" role="tab" aria-controls="supprimer{$nomTable}" aria-selected="false">Supprimer</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="modifier{$nomTable}" role="tabpanel" aria-labelledby="modifier{$nomTable}-tab">
+        {include file="$cheminModifier"}
+    </div>
+    <div class="tab-pane fade" id="supprimer{$nomTable}" role="tabpanel" aria-labelledby="supprimer{$nomTable}-tab">
+        {include file="templates/formulaireAdminSupprimer.html" nomTable=$nomTable tabId=$tabTabId[$nomTable]}
+    </div>
+</div>
+
+<script>
+    var currentPage{$nomTable} = 1;
+    var maxPages{$nomTable} = 1;
+    var maxLignesTableau{$nomTable} = 5;
+    var tabEnteteTableau{$nomTable} = [];
+    var tabCorpsTableau{$nomTable} = [];
+
+    function setCurrentPage{$nomTable}(numPage) {
+        currentPage{$nomTable} = numPage;
+        if (currentPage{$nomTable} < 1) {
+            currentPage{$nomTable} = 1;
+        }
+        else if (currentPage{$nomTable} > maxPages{$nomTable}) {
+            currentPage{$nomTable} = maxPages{$nomTable};
+        }
+
+        ajaxAfficherTab{$nomTable}();
+    }
+
+    function decrementCurrentPage{$nomTable}() {
+        --currentPage{$nomTable};
+        if (currentPage{$nomTable} < 1) {
+            currentPage{$nomTable} = 1;
+        }
+
+        ajaxAfficherTab{$nomTable}();
+    }
+
+    function incrementCurrentPage{$nomTable}() {
+        ++currentPage{$nomTable};
+        if (currentPage{$nomTable} > maxPages{$nomTable}) {
+            currentPage{$nomTable} = maxPages{$nomTable};
+        }
+
+        ajaxAfficherTab{$nomTable}();
+    }
+
+    function ajaxRecupererMaxPages{$nomTable}() {
+        var xhr = null;
+
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        }
+        else if (window.ActiveXObject) {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        //on définit l'appel de la fonction au retour serveur
+        xhr.onreadystatechange = function () { alertAjaxRecupererMaxPages{$nomTable}(xhr); };
+
+        xhr.open("GET", "././ajaxAdminEtape1.php?table={$nomTable}", true);
+        xhr.send(null);
+    }
+
+    function alertAjaxRecupererMaxPages{$nomTable}(xhr) {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // recupération du nombre maximum de page pour le 
+            // tableau et récupération des champs de la table 
+            // qui serviront d'en-tête au tableau
+            var docXML = xhr.responseXML;
+
+            // nombre max de pages
+            var items = docXML.getElementsByTagName("nbPages")[0];
+            maxPages{$nomTable} = items.firstChild.nodeValue;
+
+            // en-tête du tableau
+            items = docXML.getElementsByTagName("enteteTableau");
+            //console.log( items[0].firstChild.nodeValue );
+            for (i = 0; i != items.length; ++i) {
+                tabEnteteTableau{$nomTable}.push(items[i].firstChild.nodeValue);
+            }
+
+            // création et affichage de l'en-tête du tableau
+            var thead = document.getElementById("enteteTableau{$nomTable}");
+            removeAllChildren(thead);
+            thead.setAttribute("class", "thead-dark");
+
+            var tr = document.createElement("tr");
+
+            for (i = 0; i != tabEnteteTableau{$nomTable}.length; ++i) {
+                var th = document.createElement("th");
+                th.setAttribute("scope", "col");
+                th.innerText = tabEnteteTableau{$nomTable}[i];
+
+                tr.appendChild(th);
+            }
+
+            thead.appendChild(tr);
+            document.getElementById("tableauDonnees{$nomTable}").appendChild(thead);
+
+
+            // création et affichage de la pagination du tableau
+            creerPagination("{$nomTable}", "page{$nomTable}Next", maxPages{$nomTable});
+        }
+    }
+
+    function ajaxAfficherTab{$nomTable}() {
+        var xhr = null;
+
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        }
+        else if (window.ActiveXObject) {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        // on définit l'appel de la fonction au retour serveur
+        xhr.onreadystatechange = function () { alertAjaxAfficherTab{$nomTable}(xhr); };
+
+        xhr.open("GET", "././ajaxAdminEtape2.php?table={$nomTable}&page=" + currentPage{$nomTable} + "&maxLignes=" + maxLignesTableau{$nomTable}, true);
+        xhr.send(null);
+    }
+
+    function alertAjaxAfficherTab{$nomTable}(xhr) {
+        if ( xhr.readyState == 4 && xhr.status == 200 )
+        {
+            var docXML = xhr.responseXML;
+            var items = docXML.getElementsByTagName("corpsTableau");
+
+            tabCorpsTableau{$nomTable} = [];
+            for (i = 0; i != items.length; ++i) {
+                var donnees = items[i].childNodes;
+                var tabDonnees = [];
+                for (j = 0; j != donnees.length; ++j) {
+                    tabDonnees.push(donnees[j].firstChild.nodeValue);
+                }
+                tabCorpsTableau{$nomTable}.push(tabDonnees);
+            }
+
+            // création et affichage du corps du tableau
+            var tbody = document.getElementById("corpsTableau{$nomTable}");
+            removeAllChildren(tbody);
+            for (i = 0; i != tabCorpsTableau{$nomTable}.length; ++i) {
+                var tr = document.createElement("tr");
+                for (j = 0; j != tabCorpsTableau{$nomTable}[i].length; ++j) {
+                    var td = document.createElement("td");
+                    td.innerText = tabCorpsTableau{$nomTable}[i][j];
+
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+
+            document.getElementById("tableauDonnees{$nomTable}").appendChild(tbody);
+        }
+    }
+
+    // création du tableau initial
+    // étape 1
+    ajaxRecupererMaxPages{$nomTable}();
+    // étape 2
+    ajaxAfficherTab{$nomTable}();
+</script>
