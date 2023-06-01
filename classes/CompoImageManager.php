@@ -55,7 +55,7 @@
 
             $reqList = $this->_bdd->prepare( 
                 "SELECT idImage
-                FROM CompoImgJeu
+                FROM Compoimgjeu
                 WHERE idJeu LIKE :idJeu
                 ORDER BY RAND() LIMIT :limit" 
             );

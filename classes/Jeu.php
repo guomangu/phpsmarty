@@ -109,8 +109,8 @@
 
             if ( $valid )
             {
-                $art;
-                while ( empty( $art ) )
+                $art = new Article( array() );
+                while ( empty( $art->getIdArticle() ) )
                 {
                     $index = rand(0, 2);
                     switch ($index) 

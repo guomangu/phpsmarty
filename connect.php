@@ -1,21 +1,17 @@
 <?php
-$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',);
-
 try 
 {
 	if ( $_SERVER['SERVER_NAME'] == "localhost" ) 
 	{
-		$bdd = new PDO( 'mysql:host=loldb;dbname=lola;charset=utf8',
-						'idlol',
-						'passlol',
-						$options);
+		$bdd = new PDO( 'mysql:host=localhost;dbname=monsite;charset=utf8',
+						'monutilisateur',
+						'motdepasse' );
 	} 
 	else 
 	{
-		$bdd = new PDO( 'mysql:host=loldb;dbname=lola;charset=utf8',
-						'idlol',
-						'passlol',
-						$options);
+		$bdd = new PDO( 'mysql:host=localhost;dbname=monsite;charset=utf8',
+						'monutilisateur',
+						'motdepasse' );
 	}
 } 
 catch ( Exception $e ) 

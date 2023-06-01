@@ -32,5 +32,5 @@
         ) 
     );
 
-    $smarty->display( 'templates/articlesHasard.html' );
+    $smarty->display( 'templates/articlesHasard.tpl' );
 ?>

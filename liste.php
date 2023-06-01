@@ -59,5 +59,5 @@
         ) 
     );
 
-    $smarty->display( 'templates/liste.html' );
+    $smarty->display( 'templates/liste.tpl' );
 ?>

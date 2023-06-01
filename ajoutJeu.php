@@ -96,4 +96,4 @@
         ) 
     );
 
-    $smarty->display( 'templates/ajoutJeu.html' );
+    $smarty->display( 'templates/ajoutJeu.tpl' );

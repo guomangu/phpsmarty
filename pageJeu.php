@@ -5,7 +5,7 @@
 
     $smarty = new Smarty();
 
-    // récupération du jeu à envoyer vers pageProduit.html =====================
+    // récupération du jeu à envoyer vers pageProduit.tpl =====================
 
     // le jeu à récuperer
     $jeu = null; 
@@ -174,5 +174,5 @@
         ) 
     );
 
-    $smarty->display( 'templates/pageProduit.html' );
+    $smarty->display( 'templates/pageProduit.tpl' );
 ?>

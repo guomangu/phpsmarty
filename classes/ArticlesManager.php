@@ -171,7 +171,7 @@
 
             $reqList = $this->_bdd->query( 
                 'SELECT idJeu
-                 FROM articles
+                 FROM Articles
                  GROUP BY idjeu
                  ORDER BY MAX(dateAjout) DESC
                  LIMIT 3' 

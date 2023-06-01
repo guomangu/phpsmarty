@@ -75,7 +75,7 @@
         ) 
     );
 
-    $smarty->display( 'templates/accueil.html' );
+    $smarty->display( 'templates/accueil.tpl' );
 
     // TESTS ==================================================================
 

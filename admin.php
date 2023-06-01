@@ -277,11 +277,11 @@
             'nomTableArticles' => "Articles",
             'nomTableCommentaires' => "Commentaires",
             'nomTableImages' => "Images",
-            'urlModifierJeux' => "templates/formulaireAdminModifierJeux.html",
-            'urlModifierArticles' => "templates/formulaireAdminModifierArticles.html",
-            'urlModifierCommentaires' => 'templates/formulaireAdminModifierCommentaires.html',
-            'urlModifierImages' => "templates/formulaireAdminModifierImages.html",
-            'urlSupprimerCommentaires' => 'templates/formulaireAdminSupprimer.html',
+            'urlModifierJeux' => "templates/formulaireAdminModifierJeux.tpl",
+            'urlModifierArticles' => "templates/formulaireAdminModifierArticles.tpl",
+            'urlModifierCommentaires' => 'templates/formulaireAdminModifierCommentaires.tpl',
+            'urlModifierImages' => "templates/formulaireAdminModifierImages.tpl",
+            'urlSupprimerCommentaires' => 'templates/formulaireAdminSupprimer.tpl',
             'tabTabId' => array( 
                 'Jeux' => $jeuxManager->getIdList(),
                 'Articles' => $artManager->getIdList(),
@@ -292,5 +292,5 @@
         ) 
     );
 
-    $smarty->display( 'templates/admin.html' );
+    $smarty->display( 'templates/admin.tpl' );
 ?>

@@ -103,7 +103,7 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_internal_resource_file.php';
  *
  * @method int clearAllCache(int $exp_time = null, string $type = null)
  * @method int clearCache(string $template_name, string $cache_id = null, string $compile_id = null, int $exp_time = null, string $type = null)
- * @method int compileAllTemplates(string $extension = '.html', bool $force_compile = false, int $time_limit = 0, $max_errors = null)
+ * @method int compileAllTemplates(string $extension = '.tpl', bool $force_compile = false, int $time_limit = 0, $max_errors = null)
  * @method int compileAllConfig(string $extension = '.conf', bool $force_compile = false, int $time_limit = 0, $max_errors = null)
  * @method int clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
  */

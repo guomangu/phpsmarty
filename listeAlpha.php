@@ -117,5 +117,5 @@
         ) 
     );
 
-    $smarty->display( 'templates/listeAlpha.html' );
+    $smarty->display( 'templates/listeAlpha.tpl' );
 ?>

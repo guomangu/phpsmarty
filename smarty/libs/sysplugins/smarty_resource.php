@@ -115,7 +115,7 @@ abstract class Smarty_Resource
     /**
      * extract resource_type and resource_name from template_resource and config_resource
      *
-     * @note "C:/foo.html" was forced to file resource up till Smarty 3.1.3 (including).
+     * @note "C:/foo.tpl" was forced to file resource up till Smarty 3.1.3 (including).
      *
      * @param string $resource_name    template_resource or config_resource to parse
      * @param string $default_resource the default resource_type defined in $smarty

@@ -33,7 +33,7 @@ class Smarty_Internal_Method_CompileAllTemplates
      */
     public function compileAllTemplates(
         Smarty $smarty,
-        $extension = '.html',
+        $extension = '.tpl',
         $force_compile = false,
         $time_limit = 0,
         $max_errors = null

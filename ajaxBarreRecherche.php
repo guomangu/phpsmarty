@@ -15,7 +15,6 @@
         {
             $text = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $donnees['titre']);
             echo "<donnee>".$text."</donnee>\n";
-            echo "lol";
         }
         $reqList->closeCursor();
     }
